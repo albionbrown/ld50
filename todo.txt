@@ -1,0 +1,31 @@
+
+Start with some intro dialog. "Welcome to the party, don't let them get so drunk again" etc.
+
+drinks at different tables, eventually they get so drunk they pass out and game over.
+You have to follow them to stop them getting so drunk
+
+must haves:
+drunk moves automatically - done
+player can stop them drinking - done
+drunk meter - done
+game over
+timer
+stop moving off screen - done
+can't move over tables
+sprite rotation
+add water tap and sobering mechanics
+Other guests
+
+Nice to haves:
+intro dialog
+antagonist relatives that give them drinks
+diagonal speed same as lateral speed
+choose player and choose drunk
+different grass colour
+add static party goers - with random dialog?
+bunting border?
+table decoration
+walking animation
+Danger! text on draunkness meter when too drunk?
+increase drunkness label
+You have to mingle with guests or people get angry and kick you out
