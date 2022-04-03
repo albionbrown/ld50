@@ -33,7 +33,7 @@ public class Meter extends Sprite {
 
 		r.drawText("Drunkness", this.font, 50, 20, 16777215);
 		// Background
-		r.drawSquare(0, 48, 53, max * 2, 14);
+		r.drawSquare(0, 48, 53, (max * 2 + 4), 14);
 		// Level
 		r.drawSquare(2440609, 50, 55, level * 2, 10);
 	}

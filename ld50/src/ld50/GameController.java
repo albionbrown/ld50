@@ -7,6 +7,7 @@ import com.albionbrown.rawge.Controller;
 import com.albionbrown.rawge.GameContainer;
 import com.albionbrown.rawge.Input;
 import com.albionbrown.rawge.Renderer;
+import com.albionbrown.rawge.audio.SoundClip;
 import com.albionbrown.rawge.gfx.*;
 
 public class GameController implements Controller {
@@ -34,6 +35,9 @@ public ArrayList<Table> tables;
 
 private boolean gameOver;
 private DialogBox gameOverText;
+private SoundClip gameOverSound;
+
+private SoundClip backgroundNoise;
 
   public static void main(String[] args) {
 	  GameController gController = new GameController();
@@ -69,7 +73,7 @@ private DialogBox gameOverText;
 	  drunk.setTables(tables);
 	  
 	  drunkMeter = new Meter(0, 100);
-	  drunkMeter.setIncrement(10);
+	  drunkMeter.setIncrement(50);
 	  drunk.setDrunknessMeter(drunkMeter);
 	  
 	  player.setDrunk(drunk);
@@ -90,6 +94,10 @@ private DialogBox gameOverText;
 	  gameOverText.setBreakOnWord(false);
 	  
 	  clock = new Clock();
+	  gameOverSound = new SoundClip(getClass().getResourceAsStream("/audio/horn.wav"));
+	  gameOverSound.stop();
+	  backgroundNoise = new SoundClip(getClass().getResourceAsStream("/audio/background.wav"));
+	  backgroundNoise.stop();
 	  
 	  initialiseGuests();
   }
@@ -98,6 +106,11 @@ private DialogBox gameOverText;
   public void update(GameContainer gc) {
 	  
 	 if (!gameOver) {
+		 
+		 if (!backgroundNoise.isRunning()) {
+			 backgroundNoise.play();
+		 }
+		 
 		 drunk.update();
 		 player.update();
 		 drunkMeter.update();
@@ -111,7 +124,12 @@ private DialogBox gameOverText;
 	 else {
 		 clock.stop();
 		 clock.setY(500);
+		 clock.setX(625);
 		 gameOverText.setRender(true);
+		 backgroundNoise.stop();
+		 if (!gameOverSound.isRunning()) {
+			 gameOverSound.play(); 
+		 }
 	 }
   }
 

@@ -15,7 +15,7 @@ public class Clock {
 	
 	private final long nanosInSec = 1000000000;
 	
-	private int y;
+	private int x, y;
 	
 	private boolean stop;
 	
@@ -28,7 +28,8 @@ public class Clock {
 		font.setNumberOfCharacters(59);
 		font.readImageCharacters();
 		
-		y = 25;
+		x = 50;
+		y = 100;
 		
 		stop = false;
 	}
@@ -78,7 +79,12 @@ public class Clock {
 		
 		time.append(String.valueOf(minute));
 		
-		r.drawText(time.toString(), font, 625, y, 16777215);
+		r.drawSquare(0, x - 5, y - 5, 115, 70);
+		r.drawText(time.toString(), font, x, y, 16777215);
+	}
+	
+	public void setX(int x) {
+		this.x = x;
 	}
 
 	public void setY(int y) {
