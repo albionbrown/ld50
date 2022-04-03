@@ -44,16 +44,12 @@ public ArrayList<Table> tables;
 	  
 	  // Initialise player
 	  Image playerImage = new Image(getClass().getResourceAsStream("/img/player.png"));
-	  player = new Player("player", playerImage, 82, 60, 0, 0, input);
-	  player.setX(730);
-	  player.setY(840);
-	  
+	  player = new Player("player", playerImage, 82, 60, 730, 840, input);
+
 	  // Initialise the drunk
 	  ImageTile drunkImage = new ImageTile(getClass().getResourceAsStream("/img/drunk_animation.png"), 80, 80);
-	  drunk = new Drunk("drunk", drunkImage, 80, 80, 0, 0, input);
-	  drunk.setX(640);
-	  drunk.setY(840);
-	  
+	  drunk = new Drunk("drunk", drunkImage, 80, 80, 640, 840, input);
+
 	  // Initialise scenery
 	  initialiseTables();
 	  drunk.setTables(tables);

@@ -114,12 +114,14 @@ public class Drunk extends InteractableSprite {
 	}
 	
 	private void pickTable() {
-		int nextTableNo = (int) ((Math.random() * (4 - 0)) + 0);
+		int nextTableNo = (int) ((Math.random() * (5 - 0)) + 0);
 		nextTable = tables.get(nextTableNo);
 		while (nextTable == lastTableVisited) {
-			nextTableNo = (int) ((Math.random() * (4 - 0)) + 0);
+			nextTableNo = (int) ((Math.random() * (5 - 0)) + 0);
 			nextTable = tables.get(nextTableNo);
 		}
+		
+		System.out.println(nextTableNo);
 	}
 	
 	private void travelToTable() {
@@ -139,7 +141,7 @@ public class Drunk extends InteractableSprite {
 				x = x + speed;
 			}
 			
-			movedDown = true;
+			movedRight = true;
 		}
 		
 		if (x > nextTable.getPointX()) {
@@ -151,7 +153,7 @@ public class Drunk extends InteractableSprite {
 				x = x - speed;
 			}
 			
-			movedUp = true;
+			movedLeft = true;
 		}
 		
 		if (y < nextTable.getPointY()) {
@@ -163,7 +165,7 @@ public class Drunk extends InteractableSprite {
 				y = y + speed;
 			}
 			
-			movedRight = true;
+			movedDown = true;
 		}
 		
 		if (y > nextTable.getPointY()) {
@@ -174,52 +176,51 @@ public class Drunk extends InteractableSprite {
 				y = y - speed;
 			}
 			
-			movedLeft = true;
+			movedUp = true;
 		}
 		
 		
-//		if (movedUp && !(movedLeft || movedRight)) {
-//			
-//			animationState = AnimationState.UP;
-//		}
-//		
-//		if (movedUp && movedLeft) {
-//			
-//			animationState = AnimationState.UP_LEFT;
-//		}
-//			
-//		if (movedUp && movedRight) {
-//			
-//			animationState = AnimationState.UP_RIGHT;
-//		}
-//
-//		if (movedRight && !(movedUp || movedDown)) {
-//			
-//			animationState = AnimationState.RIGHT;
-//		}
-//		
-//		if (movedLeft && !(movedUp || movedDown)) {
-//			
-//			animationState = AnimationState.LEFT;
-//		}
-//		
-//		if (movedDown && !(movedLeft || movedRight)) {
-//			
-//			animationState = AnimationState.DOWN;
-//		}
-//		
-//		if (movedDown && movedLeft) {
-//			
-//			animationState = AnimationState.DOWN_LEFT;
-//		}	
-//			
-//		if (movedDown && movedRight) {
-//			
-//			animationState = AnimationState.DOWN_RIGHT;
-//		}
+		if (movedUp && !(movedLeft || movedRight)) {
+			
+			animationState = AnimationState.UP;
+		}
 		
-//		System.out.println(animationState);
-//		mapAnimationStateToCoordinates();
+		if (movedUp && movedLeft) {
+			
+			animationState = AnimationState.UP_LEFT;
+		}
+			
+		if (movedUp && movedRight) {
+			
+			animationState = AnimationState.UP_RIGHT;
+		}
+
+		if (movedRight && !(movedUp || movedDown)) {
+			
+			animationState = AnimationState.RIGHT;
+		}
+		
+		if (movedLeft && !(movedUp || movedDown)) {
+			
+			animationState = AnimationState.LEFT;
+		}
+		
+		if (movedDown && !(movedLeft || movedRight)) {
+			
+			animationState = AnimationState.DOWN;
+		}
+		
+		if (movedDown && movedLeft) {
+			
+			animationState = AnimationState.DOWN_LEFT;
+		}	
+			
+		if (movedDown && movedRight) {
+			
+			animationState = AnimationState.DOWN_RIGHT;
+		}
+		
+		mapAnimationStateToCoordinates();
 	}
 	
 	public int getDrunkness() {
@@ -280,38 +281,38 @@ public class Drunk extends InteractableSprite {
 				break;
 				
 			case DOWN:
-				this.imageX = 80;
+				this.imageX = 1;
 				this.imageY = 0;
 				break;
 				
 			case RIGHT:
-				this.imageX = 160;
+				this.imageX = 2;
 				this.imageY = 0;
 				break;
 				
 			case LEFT:
-				this.imageX = 240;
+				this.imageX = 3;
 				this.imageY = 0;
 				break;
 				
 			case UP_RIGHT:
 				this.imageX = 0;
-				this.imageY = 80;
+				this.imageY = 1;
 				break;
 				
 			case UP_LEFT:
-				this.imageX = 80;
-				this.imageY = 80;
+				this.imageX = 1;
+				this.imageY = 1;
 				break;
 				
 			case DOWN_RIGHT:
-				this.imageX = 160;
-				this.imageY = 80;
+				this.imageX = 2;
+				this.imageY = 1;
 				break;
 				
 			case DOWN_LEFT:
-				this.imageX = 240;
-				this.imageY = 80;
+				this.imageX = 3;
+				this.imageY = 1;
 				break;
 		}
 	}
