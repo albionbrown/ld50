@@ -16,6 +16,11 @@ public static Input input;
 public Player player;
 public Drunk drunk;
 
+public Guest guest1;
+public Guest guest2;
+public Guest guest3;
+public Guest guest4;
+
 public Meter drunkMeter;
 
 public Clock clock;
@@ -64,7 +69,7 @@ private DialogBox gameOverText;
 	  drunk.setTables(tables);
 	  
 	  drunkMeter = new Meter(0, 100);
-	  drunkMeter.setIncrement(50);
+	  drunkMeter.setIncrement(10);
 	  drunk.setDrunknessMeter(drunkMeter);
 	  
 	  player.setDrunk(drunk);
@@ -85,6 +90,8 @@ private DialogBox gameOverText;
 	  gameOverText.setBreakOnWord(false);
 	  
 	  clock = new Clock();
+	  
+	  initialiseGuests();
   }
 
   @Override
@@ -120,6 +127,11 @@ private DialogBox gameOverText;
 	  table3.render(r);
 	  table4.render(r);
 	  table5.render(r);
+	  
+	  guest1.render(r);
+	  guest2.render(r);
+	  guest3.render(r);
+	  guest4.render(r);
 	  
 	  drunk.render(r);
 	  player.render(r);
@@ -178,5 +190,20 @@ private DialogBox gameOverText;
 	  tables.add(table3);
 	  tables.add(table4);
 	  tables.add(table5);
+  }
+  
+  private void initialiseGuests() {
+	  
+	  Image guest1Image = new Image(getClass().getResourceAsStream("/img/guest_1.png"));
+	  guest1 = new Guest(guest1Image, 750, 450);
+	  
+	  Image guest2Image = new Image(getClass().getResourceAsStream("/img/guest_2.png"));
+	  guest2 = new Guest(guest2Image, 830, 450);
+	  
+	  Image guest3Image = new Image(getClass().getResourceAsStream("/img/guest_3.png"));
+	  guest3 = new Guest(guest3Image, 370, 400);
+	  
+	  Image guest4Image = new Image(getClass().getResourceAsStream("/img/guest_4.png"));
+	  guest4 = new Guest(guest4Image, 370, 330);
   }
 }
