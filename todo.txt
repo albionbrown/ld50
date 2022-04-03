@@ -15,6 +15,7 @@ can't move over tables
 sprite rotation - done
 add water tap and sobering mechanics
 Other guests
+increase text size - change Font class to read over multiple pixels of blue and yellow
 
 Nice to haves:
 intro dialog

@@ -22,6 +22,9 @@ public Table table4;
 public Table table5;
 public ArrayList<Table> tables;
 
+private boolean gameOver;
+private DialogBox gameOverText;
+
   public static void main(String[] args) {
 	  GameController gController = new GameController();
 	  GameContainer gContainer = new GameContainer("LD50", 1280, 960, gController);
@@ -38,6 +41,7 @@ public ArrayList<Table> tables;
   
   public GameController() {
 	  tables = new ArrayList<Table>();
+	  gameOver = false;
   }
   
   public void init() {
@@ -59,14 +63,35 @@ public ArrayList<Table> tables;
 	  drunk.setDrunknessMeter(drunkMeter);
 	  
 	  player.setDrunk(drunk);
+	  
+	  gameOverText = new DialogBox(DialogBox.Mode.SOLID);
+	  Image image = new Image(getClass().getResourceAsStream("/img/font_50.png"));
+		
+	  gameOverText.setFontImage(image);
+	  gameOverText.setNumberOfCharacters(59);
+	  gameOverText.readImageCharacters();
+	  gameOverText.setRender(true);
+	  gameOverText.setX(110);
+	  gameOverText.setY(230);
+	  gameOverText.setWidth(100);
+	  gameOverText.setHeight(0);
+	  gameOverText.setText("Game over");
+	  gameOverText.setBackgroundColour(0x000);
+	  gameOverText.setBreakOnWord(false);
   }
 
   @Override
   public void update(GameContainer gc) {
 	  
-	 drunk.update();
-	 player.update();
-	 drunkMeter.update();
+	 if (!gameOver) {
+		 drunk.update();
+		 player.update();
+		 drunkMeter.update();
+		 
+	 }
+	 else {
+		 
+	 }
   }
 
   @Override
@@ -86,6 +111,10 @@ public ArrayList<Table> tables;
 	  player.render(r);
 	  
 	  drunkMeter.render(r);
+	  
+	  if (!gameOver) {
+		  gameOverText.render(r);
+	  }
   }
   
   private void initialiseTables() {
