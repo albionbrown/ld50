@@ -17,7 +17,7 @@ public class Meter extends Sprite {
 		this.increment = 1;
 		
 		font = new Font();
-		font.setFontImage(new Image(getClass().getResourceAsStream("/img/font.png")));
+		font.setFontImage(new Image(getClass().getResourceAsStream("/img/font_30.png")));
 		font.setNumberOfCharacters(59);
 		font.readImageCharacters();
 	}
@@ -30,9 +30,12 @@ public class Meter extends Sprite {
 
 	@Override
 	public void render(Renderer r) {
-		// TODO Auto-generated method stub
+
 		r.drawText("Drunkness", this.font, 50, 20, 16777215);
-		r.drawSquare(2440609, 50, 50, level, 10);
+		// Background
+		r.drawSquare(0, 48, 53, max * 2, 14);
+		// Level
+		r.drawSquare(2440609, 50, 55, level * 2, 10);
 	}
 	
 	public void increment() {
