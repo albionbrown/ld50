@@ -42,6 +42,8 @@ private SoundClip backgroundNoise;
 
 private boolean introCompleted;
 
+private Image bunting;
+
 
   public static void main(String[] args) {
 	  GameController gController = new GameController();
@@ -107,6 +109,8 @@ private boolean introCompleted;
 	  backgroundNoise.setVolume(-20);
 	  
 	  initialiseGuests();
+	  
+	  bunting = new Image(getClass().getResourceAsStream("/img/bunting.png"));
   }
 
   @Override
@@ -170,6 +174,8 @@ private boolean introCompleted;
 	  
 	  drunk.render(r);
 	  player.render(r);
+	  
+	  r.drawImage(bunting, 0, 0);
 	  
 	  drunkMeter.render(r);
 	  clock.render(r);
