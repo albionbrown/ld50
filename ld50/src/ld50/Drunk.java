@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.albionbrown.rawge.Input;
 import com.albionbrown.rawge.Renderer;
-import com.albionbrown.rawge.gfx.Image;
 import com.albionbrown.rawge.gfx.ImageTile;
 import com.albionbrown.rawge.gfx.InteractableSprite;
 
@@ -14,6 +13,8 @@ public class Drunk extends InteractableSprite {
 	
 	private ImageTile imageTile;
 	private int imageX, imageY;
+	
+	private int frontX, frontY;
 	
 	private ArrayList<Table> tables;
 	private Table lastTableVisited;
@@ -26,6 +27,7 @@ public class Drunk extends InteractableSprite {
 	private long reachedTableAt;
 	private long lastUpdate;
 	
+	
 	private final long nanoToSec = 1000000000; 
 	
 	private Meter drunknessMeter;
@@ -35,6 +37,8 @@ public class Drunk extends InteractableSprite {
 	
 	private boolean stoppedByPlayer;
 	private AnimationState animationState;
+	
+	private Beer beer;
 
 	public Drunk(String id, ImageTile image, int width, int height, int x, int y, Input input)
 	{
@@ -47,6 +51,9 @@ public class Drunk extends InteractableSprite {
 		
 		this.imageX = 0;
 		this.imageY = 0;
+		
+		this.frontX = x + (this.width / 2);
+		this.frontY = y;
 		
 		lastTableVisited = null;
 		nextTable = null;
@@ -65,6 +72,7 @@ public class Drunk extends InteractableSprite {
 		
 		long currentSystemTime = System.nanoTime();
 		
+		
 		if (reachedTable) {
 			
 			// Wait 5 seconds
@@ -74,7 +82,8 @@ public class Drunk extends InteractableSprite {
 				travellingToTable = false;
 				reachedTable = false;
 			}
-			else {
+			// Add a 'grace' second
+			else if (timer > nanoToSec) {
 				isDrinking = true;
 			}
 		}
@@ -103,6 +112,8 @@ public class Drunk extends InteractableSprite {
 			}
 		}
 		
+		
+		calculateAnimationDependencies();
 		stoppedByPlayer = false;
 		lastUpdate = currentSystemTime;
 	}
@@ -111,6 +122,7 @@ public class Drunk extends InteractableSprite {
 	public void render(Renderer r) {
 		
 		r.drawImageTile(getImageTile(), this.x, this.y, this.imageX, this.imageY);
+//		r.drawImage(beerImage, frontY, frontX);
 	}
 	
 	private void pickTable() {
@@ -219,8 +231,6 @@ public class Drunk extends InteractableSprite {
 			
 			animationState = AnimationState.DOWN_RIGHT;
 		}
-		
-		mapAnimationStateToCoordinates();
 	}
 	
 	public int getDrunkness() {
@@ -271,49 +281,69 @@ public class Drunk extends InteractableSprite {
 		this.imageTile = imageTile;
 	}
 
-	private void mapAnimationStateToCoordinates()
+	private void calculateAnimationDependencies()
 	{
 		switch (animationState) {
 			
 			case UP:
 				this.imageX = 0;
 				this.imageY = 0;
+				this.frontX = this.x + (this.width / 2);
+				this.frontY = this.y;
 				break;
 				
 			case DOWN:
 				this.imageX = 1;
 				this.imageY = 0;
+				this.frontX = this.x + (this.width / 2);
+				this.frontY = this.y + this.height;
 				break;
 				
 			case RIGHT:
 				this.imageX = 2;
 				this.imageY = 0;
+				this.frontX = this.x + this.width;
+				this.frontY = this.y + (this.height / 2);
 				break;
 				
 			case LEFT:
 				this.imageX = 3;
 				this.imageY = 0;
+				this.frontX = this.x;
+				this.frontY = this.y + (this.height / 2);
 				break;
 				
 			case UP_RIGHT:
 				this.imageX = 0;
 				this.imageY = 1;
+				this.frontX = this.x + this.width;
+				this.frontY = this.y;
 				break;
 				
 			case UP_LEFT:
 				this.imageX = 1;
 				this.imageY = 1;
+				this.frontX = this.x;
+				this.frontY = this.y;
 				break;
 				
 			case DOWN_RIGHT:
 				this.imageX = 2;
 				this.imageY = 1;
+				this.frontX = this.x + this.width;
+				this.frontY = this.y + this.height;
 				break;
 				
 			case DOWN_LEFT:
 				this.imageX = 3;
 				this.imageY = 1;
+				this.frontX = this.x;
+				this.frontY = this.y + this.height;
 				break;
 		}
+	}
+	
+	private class Beer {
+		
 	}
 }

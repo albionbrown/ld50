@@ -8,25 +8,30 @@ must haves:
 drunk moves automatically - done
 player can stop them drinking - done
 drunk meter - done
-game over - print time reached
-timer
+game over - done
+timer - done
 stop moving off screen - done
 can't move over tables
 sprite rotation - done
 add water tap and sobering mechanics
-Other guests
-increase text size - change Font class to read over multiple pixels of blue and yellow
+Other guests - done - with random dialog?
+increase text size - done
+sound - party noise and slap
+can't go through other guests
 
 Nice to haves:
+beer in drunk's hand
+guests move around randomly
+surprise drops - 
+front of drunk matches table point
 intro dialog
 antagonist relatives that give them drinks
 diagonal speed same as lateral speed
 choose player and choose drunk
-different grass colour
-add static party goers - with random dialog?
+different grass colour - done
 bunting border?
 table decoration
 walking animation
 Danger! text on draunkness meter when too drunk?
-increase drunkness label
+increase drunkness label - done
 You have to mingle with guests or people get angry and kick you out
