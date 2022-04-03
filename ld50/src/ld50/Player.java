@@ -1,12 +1,15 @@
 package ld50;
 
 import java.awt.event.KeyEvent;
+import java.util.HashSet;
 
 import com.albionbrown.rawge.Input;
 import com.albionbrown.rawge.Renderer;
 import com.albionbrown.rawge.audio.SoundClip;
 import com.albionbrown.rawge.gfx.ImageTile;
+import com.albionbrown.rawge.gfx.Interactable;
 import com.albionbrown.rawge.gfx.InteractableSprite;
+import com.albionbrown.rawge.gfx.Sprite;
 
 public class Player extends InteractableSprite {
 	
@@ -30,6 +33,7 @@ public class Player extends InteractableSprite {
 
 	public Player(String id, ImageTile image, int width, int height, int x, int y, Input input)
 	{
+		super();
 		this.imageTile = image;
 		this.width = width;
 		this.height = height;
@@ -53,27 +57,35 @@ public class Player extends InteractableSprite {
 		  boolean movedLeft = false;
 		
 		  if (this.getInput().isKey(KeyEvent.VK_LEFT) && ((this.x - speed) >= 0)) {
-								
-			  this.x = this.x - speed;
-			  movedLeft = true;
+			  
+			  if (!wouldBeTouchingAnotherSprite(this.x - speed, this.y)) {
+				  this.x = this.x - speed;
+				  movedLeft = true;
+			  }
 		  }
 
 		  if (this.getInput().isKey(KeyEvent.VK_RIGHT) && (((this.x + this.width) + speed) <= 1280)) {
-								
-			  this.x = this.x + speed;
-			  movedRight = true;
+					
+			  if (!wouldBeTouchingAnotherSprite(this.x + this.width + speed, this.y)) {
+				  this.x = this.x + speed;
+				  movedRight = true;
+			  }
 		  }
 		  
 		  if (this.getInput().isKey(KeyEvent.VK_UP) && ((this.y - speed) >= 0)) {
 				
-			  this.y = this.y - speed;
-			  movedUp = true;
+			  if (!wouldBeTouchingAnotherSprite(this.x, this.y - speed)) {
+				  this.y = this.y - speed;
+				  movedUp = true;
+			  }
 		  }
 		  
 		  if (this.getInput().isKey(KeyEvent.VK_DOWN) && (((this.y + this.height) + speed) <= 960)) {
 				
-			  this.y = this.y + speed;
-			  movedDown = true;
+			  if (!wouldBeTouchingAnotherSprite(this.x, this.y + this.height + speed)) {
+				  this.y = this.y + speed;
+				  movedDown = true;
+			  }
 		  }
 		  
 		  if (movedUp && !(movedLeft || movedRight)) {
@@ -207,5 +219,20 @@ public class Player extends InteractableSprite {
 	private void slap() {
 		drunk.setStoppedByPlayer(true);
 		slapClip.play();
+	}
+	
+	private boolean wouldBeTouchingAnotherSprite(int x, int y) {
+		
+		boolean touching = false;
+		
+		for (Interactable sprite: getInteractables()) {
+			
+			if (wouldBeTouching(x, y, (Sprite)sprite)) {
+				touching = true;
+				break;
+			}
+		}
+		
+		return touching;
 	}
 }

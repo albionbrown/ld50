@@ -6,10 +6,13 @@ import com.albionbrown.rawge.gfx.InteractableSprite;
 
 public class Guest extends InteractableSprite {
 
-	public Guest(Image image, int x, int y) {
+	public Guest(String id, Image image, int x, int y) {
+		this.id = id;
 		this.image = image;
 		this.x = x;
 		this.y = y;
+		this.width = image.getW();
+		this.height = image.getH();
 	}
 	
 	@Override

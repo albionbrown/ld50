@@ -36,8 +36,10 @@ public ArrayList<Table> tables;
 private boolean gameOver;
 private DialogBox gameOverText;
 private SoundClip gameOverSound;
+private boolean gameOverSoundPlayed;
 
 private SoundClip backgroundNoise;
+
 
   public static void main(String[] args) {
 	  GameController gController = new GameController();
@@ -56,6 +58,7 @@ private SoundClip backgroundNoise;
   public GameController() {
 	  tables = new ArrayList<Table>();
 	  gameOver = false;
+	  gameOverSoundPlayed = false;
   }
   
   public void init() {
@@ -73,7 +76,7 @@ private SoundClip backgroundNoise;
 	  drunk.setTables(tables);
 	  
 	  drunkMeter = new Meter(0, 100);
-	  drunkMeter.setIncrement(50);
+	  drunkMeter.setIncrement(10);
 	  drunk.setDrunknessMeter(drunkMeter);
 	  
 	  player.setDrunk(drunk);
@@ -98,6 +101,7 @@ private SoundClip backgroundNoise;
 	  gameOverSound.stop();
 	  backgroundNoise = new SoundClip(getClass().getResourceAsStream("/audio/background.wav"));
 	  backgroundNoise.stop();
+	  backgroundNoise.setVolume(-20);
 	  
 	  initialiseGuests();
   }
@@ -127,7 +131,8 @@ private SoundClip backgroundNoise;
 		 clock.setX(625);
 		 gameOverText.setRender(true);
 		 backgroundNoise.stop();
-		 if (!gameOverSound.isRunning()) {
+		 if (!gameOverSound.isRunning() && gameOverSoundPlayed) {
+			 gameOverSoundPlayed = true;
 			 gameOverSound.play(); 
 		 }
 	 }
@@ -163,7 +168,7 @@ private SoundClip backgroundNoise;
   }
   
   private void initialiseTables() {
-	  table1 = new Table();
+	  table1 = new Table("table 1");
 	  table1.setX(50);
 	  table1.setY(750);
 	  table1.setWidth(350);
@@ -171,7 +176,7 @@ private SoundClip backgroundNoise;
 	  table1.setPointX(225);
 	  table1.setPointY(750);
 
-	  table2 = new Table();
+	  table2 = new Table("table 2");
 	  table2.setX(50);
 	  table2.setY(265);
 	  table2.setWidth(180);
@@ -179,7 +184,7 @@ private SoundClip backgroundNoise;
 	  table2.setPointX(230);
 	  table2.setPointY(440);
 
-	  table3 = new Table();
+	  table3 = new Table("table 3");
 	  table3.setX(850);
 	  table3.setY(50);
 	  table3.setWidth(350);
@@ -187,7 +192,7 @@ private SoundClip backgroundNoise;
 	  table3.setPointX(1025);
 	  table3.setPointY(230);
 
-	  table4 = new Table();
+	  table4 = new Table("table 4");
 	  table4.setX(1050);
 	  table4.setY(550);
 	  table4.setWidth(180);
@@ -195,7 +200,7 @@ private SoundClip backgroundNoise;
 	  table4.setPointX(1050);
 	  table4.setPointY(725);
 
-	  table5 = new Table();
+	  table5 = new Table("table 5");
 	  table5.setX(315);
 	  table5.setY(50);
 	  table5.setWidth(350);
@@ -208,20 +213,31 @@ private SoundClip backgroundNoise;
 	  tables.add(table3);
 	  tables.add(table4);
 	  tables.add(table5);
+	  
+	  player.addInteractable(table1);
+	  player.addInteractable(table2);
+	  player.addInteractable(table3);
+	  player.addInteractable(table4);
+	  player.addInteractable(table5);
   }
   
   private void initialiseGuests() {
 	  
 	  Image guest1Image = new Image(getClass().getResourceAsStream("/img/guest_1.png"));
-	  guest1 = new Guest(guest1Image, 750, 450);
+	  guest1 = new Guest("Guest 1", guest1Image, 750, 450);
 	  
 	  Image guest2Image = new Image(getClass().getResourceAsStream("/img/guest_2.png"));
-	  guest2 = new Guest(guest2Image, 830, 450);
+	  guest2 = new Guest("Guest 2", guest2Image, 830, 450);
 	  
 	  Image guest3Image = new Image(getClass().getResourceAsStream("/img/guest_3.png"));
-	  guest3 = new Guest(guest3Image, 370, 400);
+	  guest3 = new Guest("Guest 3", guest3Image, 370, 400);
 	  
 	  Image guest4Image = new Image(getClass().getResourceAsStream("/img/guest_4.png"));
-	  guest4 = new Guest(guest4Image, 370, 330);
+	  guest4 = new Guest("Guest 4", guest4Image, 370, 330);
+	  
+	  player.addInteractable(guest1);
+	  player.addInteractable(guest2);
+	  player.addInteractable(guest3);
+	  player.addInteractable(guest4);
   }
 }

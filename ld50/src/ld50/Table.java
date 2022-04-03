@@ -1,13 +1,17 @@
 package ld50;
 
 import com.albionbrown.rawge.Renderer;
-import com.albionbrown.rawge.gfx.Sprite;
+import com.albionbrown.rawge.gfx.InteractableSprite;
 
-public class Table extends Sprite {
+public class Table extends InteractableSprite {
 
 	private int height, width;
 	
 	private int pointX, pointY;
+	
+	public Table(String id) {
+		this.id = id;
+	}
 	
 	public int getPointX() {
 		return pointX;
@@ -51,6 +55,18 @@ public class Table extends Sprite {
 	public void render(Renderer r) {
 		// TODO Auto-generated method stub
 		r.drawSquare(8421504, x, y, width, height);
+	}
+
+	@Override
+	public void contactCallback() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void noContactCallback() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
