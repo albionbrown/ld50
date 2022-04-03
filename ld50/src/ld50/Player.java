@@ -66,7 +66,7 @@ public class Player extends InteractableSprite {
 
 		  if (this.getInput().isKey(KeyEvent.VK_RIGHT) && (((this.x + this.width) + speed) <= 1280)) {
 					
-			  if (!wouldBeTouchingAnotherSprite(this.x + this.width + speed, this.y)) {
+			  if (!wouldBeTouchingAnotherSprite(this.x + speed, this.y)) {
 				  this.x = this.x + speed;
 				  movedRight = true;
 			  }
@@ -82,7 +82,7 @@ public class Player extends InteractableSprite {
 		  
 		  if (this.getInput().isKey(KeyEvent.VK_DOWN) && (((this.y + this.height) + speed) <= 960)) {
 				
-			  if (!wouldBeTouchingAnotherSprite(this.x, this.y + this.height + speed)) {
+			  if (!wouldBeTouchingAnotherSprite(this.x, this.y + speed)) {
 				  this.y = this.y + speed;
 				  movedDown = true;
 			  }

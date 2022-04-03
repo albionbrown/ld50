@@ -131,7 +131,7 @@ private SoundClip backgroundNoise;
 		 clock.setX(625);
 		 gameOverText.setRender(true);
 		 backgroundNoise.stop();
-		 if (!gameOverSound.isRunning() && gameOverSoundPlayed) {
+		 if (!gameOverSound.isRunning() && !gameOverSoundPlayed) {
 			 gameOverSoundPlayed = true;
 			 gameOverSound.play(); 
 		 }
