@@ -12,7 +12,7 @@ game over
 timer
 stop moving off screen - done
 can't move over tables
-sprite rotation
+sprite rotation - done
 add water tap and sobering mechanics
 Other guests
 

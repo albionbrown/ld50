@@ -43,8 +43,8 @@ public ArrayList<Table> tables;
   public void init() {
 	  
 	  // Initialise player
-	  Image playerImage = new Image(getClass().getResourceAsStream("/img/player.png"));
-	  player = new Player("player", playerImage, 82, 60, 730, 840, input);
+	  ImageTile playerImage = new ImageTile(getClass().getResourceAsStream("/img/player_animation.png"), 80, 80);
+	  player = new Player("player", playerImage, 80, 80, 730, 840, input);
 
 	  // Initialise the drunk
 	  ImageTile drunkImage = new ImageTile(getClass().getResourceAsStream("/img/drunk_animation.png"), 80, 80);
