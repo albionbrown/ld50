@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 
 import com.albionbrown.rawge.Input;
 import com.albionbrown.rawge.Renderer;
-import com.albionbrown.rawge.gfx.Image;
+import com.albionbrown.rawge.audio.SoundClip;
 import com.albionbrown.rawge.gfx.ImageTile;
 import com.albionbrown.rawge.gfx.InteractableSprite;
 
@@ -16,6 +16,7 @@ public class Player extends InteractableSprite {
 	private ImageTile imageTile;
 	private int imageX, imageY;
 	
+	private SoundClip slapClip;
 	
 	private AnimationState animationState;
 
@@ -39,6 +40,8 @@ public class Player extends InteractableSprite {
 		this.imageX = 0;
 		this.imageY = 0;
 		animationState = AnimationState.UP;
+		
+		slapClip = new SoundClip(getClass().getResourceAsStream("/audio/slap.wav"));
 	}
 	
 	@Override
@@ -49,13 +52,12 @@ public class Player extends InteractableSprite {
 		  boolean movedRight = false;
 		  boolean movedLeft = false;
 		
-		  // Register the next move
 		  if (this.getInput().isKey(KeyEvent.VK_LEFT) && ((this.x - speed) >= 0)) {
 								
 			  this.x = this.x - speed;
 			  movedLeft = true;
 		  }
-		  // If leaning right
+
 		  if (this.getInput().isKey(KeyEvent.VK_RIGHT) && (((this.x + this.width) + speed) <= 1280)) {
 								
 			  this.x = this.x + speed;
@@ -121,10 +123,9 @@ public class Player extends InteractableSprite {
 			  
 			  if (this.getInput().isKey(KeyEvent.VK_SPACE)) {
 					
-				  drunk.setStoppedByPlayer(true);
+				  slap();
 			  }
-		  }
-		  
+		  }  
 	}
 
 	@Override
@@ -201,5 +202,10 @@ public class Player extends InteractableSprite {
 				this.imageY = 1;
 				break;
 		}
+	}
+	
+	private void slap() {
+		drunk.setStoppedByPlayer(true);
+		slapClip.play();
 	}
 }
