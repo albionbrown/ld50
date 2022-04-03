@@ -40,6 +40,8 @@ private boolean gameOverSoundPlayed;
 
 private SoundClip backgroundNoise;
 
+private boolean introCompleted;
+
 
   public static void main(String[] args) {
 	  GameController gController = new GameController();
@@ -59,6 +61,7 @@ private SoundClip backgroundNoise;
 	  tables = new ArrayList<Table>();
 	  gameOver = false;
 	  gameOverSoundPlayed = false;
+	  introCompleted = false;
   }
   
   public void init() {
@@ -109,33 +112,41 @@ private SoundClip backgroundNoise;
   @Override
   public void update(GameContainer gc) {
 	  
-	 if (!gameOver) {
-		 
-		 if (!backgroundNoise.isRunning()) {
-			 backgroundNoise.loop();
-			 backgroundNoise.play();
-		 }
-		 
-		 drunk.update();
-		 player.update();
-		 drunkMeter.update();
-		 
-		 clock.update();
-		 
-		 if (drunkMeter.getLevel() >= 100) {
-			 gameOver = true;
-		 }
+	 // Introduction 
+	 if (!introCompleted) {
+		 introCompleted = true;
 	 }
 	 else {
-		 clock.stop();
-		 clock.setY(500);
-		 clock.setX(625);
-		 gameOverText.setRender(true);
-		 backgroundNoise.stop();
-		 if (!gameOverSound.isRunning() && !gameOverSoundPlayed) {
-			 gameOverSoundPlayed = true;
-			 gameOverSound.play(); 
+		 
+		 // Normal game loop
+		 if (!gameOver) {
+			 
+			 if (!backgroundNoise.isRunning()) {
+				 backgroundNoise.loop();
+				 backgroundNoise.play();
+			 }
+			 
+			 drunk.update();
+			 player.update();
+			 drunkMeter.update();
+			 
+			 clock.update();
+			 
+			 if (drunkMeter.getLevel() >= 100) {
+				 gameOver = true;
+			 }
 		 }
+		 else {
+			 clock.stop();
+			 clock.setY(500);
+			 clock.setX(625);
+			 gameOverText.setRender(true);
+			 backgroundNoise.stop();
+			 if (!gameOverSound.isRunning() && !gameOverSoundPlayed) {
+				 gameOverSoundPlayed = true;
+				 gameOverSound.play(); 
+			 }
+		 } 
 	 }
   }
 

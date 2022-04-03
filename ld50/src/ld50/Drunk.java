@@ -110,7 +110,8 @@ public class Drunk extends InteractableSprite {
 			
 			if (((x == nextTable.getPointX() && y == nextTable.getPointY())
 				|| (x + this.getWidth() == nextTable.getPointX() && y == nextTable.getPointY())
-				|| (x == nextTable.getPointX() && y + this.getHeight() == nextTable.getPointY()))
+				|| (x == nextTable.getPointX() && y + this.getHeight() == nextTable.getPointY())
+				|| (x + this.getWidth() == nextTable.getPointX() && y + this.getHeight() == nextTable.getPointY()))
 					&& !reachedTable) {
 				reachedTable = true;
 				reachedTableAt = System.nanoTime();
@@ -141,6 +142,7 @@ public class Drunk extends InteractableSprite {
 	
 	private void pickTable() {
 		int nextTableNo = (int) ((Math.random() * (5 - 0)) + 0);
+//		nextTableNo = 2;
 		nextTable = tables.get(nextTableNo);
 		while (nextTable == lastTableVisited) {
 			nextTableNo = (int) ((Math.random() * (5 - 0)) + 0);
@@ -157,7 +159,7 @@ public class Drunk extends InteractableSprite {
 		boolean movedRight = false;
 		boolean movedLeft = false;
 		
-		// Move closer to the next table
+		// Is left of
 		if (x + this.getWidth() < nextTable.getPointX()) {
 			
 			if ((x + this.getWidth() + speed) >= nextTable.getPointX()) {
@@ -169,7 +171,7 @@ public class Drunk extends InteractableSprite {
 			
 			movedRight = true;
 		}
-		
+		// Is Right of
 		if (x > nextTable.getPointX()) {
 			
 			if ((x - speed) <= nextTable.getPointX()) {
@@ -181,7 +183,7 @@ public class Drunk extends InteractableSprite {
 			
 			movedLeft = true;
 		}
-		
+		// Is above
 		if (y + this.getHeight() < nextTable.getPointY()) {
 			
 			if ((y + this.getHeight() + speed) >= nextTable.getPointY()) {
@@ -193,7 +195,7 @@ public class Drunk extends InteractableSprite {
 			
 			movedDown = true;
 		}
-		
+		// Is below
 		if (y > nextTable.getPointY()) {
 			if ((y - speed) <= nextTable.getPointY()) {
 				y = nextTable.getPointY();
