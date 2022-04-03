@@ -12,9 +12,14 @@ import com.albionbrown.rawge.gfx.*;
 public class GameController implements Controller {
 
 public static Input input;
+
 public Player player;
 public Drunk drunk;
+
 public Meter drunkMeter;
+
+public Clock clock;
+
 public Table table1;
 public Table table2;
 public Table table3;
@@ -59,7 +64,7 @@ private DialogBox gameOverText;
 	  drunk.setTables(tables);
 	  
 	  drunkMeter = new Meter(0, 100);
-	  drunkMeter.setIncrement(1);
+	  drunkMeter.setIncrement(50);
 	  drunk.setDrunknessMeter(drunkMeter);
 	  
 	  player.setDrunk(drunk);
@@ -70,14 +75,16 @@ private DialogBox gameOverText;
 	  gameOverText.setFontImage(image);
 	  gameOverText.setNumberOfCharacters(59);
 	  gameOverText.readImageCharacters();
-	  gameOverText.setRender(true);
-	  gameOverText.setX(110);
-	  gameOverText.setY(230);
+	  gameOverText.setRender(false);
+	  gameOverText.setX(550);
+	  gameOverText.setY(400);
 	  gameOverText.setWidth(100);
 	  gameOverText.setHeight(0);
 	  gameOverText.setText("Game over");
 	  gameOverText.setBackgroundColour(0x000);
 	  gameOverText.setBreakOnWord(false);
+	  
+	  clock = new Clock();
   }
 
   @Override
@@ -88,9 +95,16 @@ private DialogBox gameOverText;
 		 player.update();
 		 drunkMeter.update();
 		 
+		 clock.update();
+		 
+		 if (drunkMeter.getLevel() >= 100) {
+			 gameOver = true;
+		 }
 	 }
 	 else {
-		 
+		 clock.stop();
+		 clock.setY(500);
+		 gameOverText.setRender(true);
 	 }
   }
 
@@ -111,8 +125,9 @@ private DialogBox gameOverText;
 	  player.render(r);
 	  
 	  drunkMeter.render(r);
+	  clock.render(r);
 	  
-	  if (!gameOver) {
+	  if (gameOver) {
 		  gameOverText.render(r);
 	  }
   }

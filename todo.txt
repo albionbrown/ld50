@@ -8,7 +8,7 @@ must haves:
 drunk moves automatically - done
 player can stop them drinking - done
 drunk meter - done
-game over
+game over - print time reached
 timer
 stop moving off screen - done
 can't move over tables
