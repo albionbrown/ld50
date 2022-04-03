@@ -13,7 +13,7 @@ import com.albionbrown.rawge.gfx.Sprite;
 
 public class Player extends InteractableSprite {
 	
-	private int speed = 3;
+	private int speed = 2;
 	private Drunk drunk;
 	
 	private ImageTile imageTile;
@@ -219,20 +219,5 @@ public class Player extends InteractableSprite {
 	private void slap() {
 		drunk.setStoppedByPlayer(true);
 		slapClip.play();
-	}
-	
-	private boolean wouldBeTouchingAnotherSprite(int x, int y) {
-		
-		boolean touching = false;
-		
-		for (Interactable sprite: getInteractables()) {
-			
-			if (wouldBeTouching(x, y, (Sprite)sprite)) {
-				touching = true;
-				break;
-			}
-		}
-		
-		return touching;
 	}
 }

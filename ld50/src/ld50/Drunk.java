@@ -39,6 +39,10 @@ public class Drunk extends InteractableSprite {
 	private AnimationState animationState;
 	
 	private Beer beer;
+	
+	private boolean isStuck;
+	private int previousX, previousY;
+	private int stuckCounter;
 
 	public Drunk(String id, ImageTile image, int width, int height, int x, int y, Input input)
 	{
@@ -95,9 +99,19 @@ public class Drunk extends InteractableSprite {
 		}
 		else {
 			
-			travelToTable();
+			if (isStuck) {
+				pickTable();
+				isStuck = false;
+				stuckCounter = 0;
+			}
+			else {
+				travelToTable();
+			}
 			
-			if (x == nextTable.getPointX() && y == nextTable.getPointY() && !reachedTable) {
+			if (((x == nextTable.getPointX() && y == nextTable.getPointY())
+				|| (x + this.getWidth() == nextTable.getPointX() && y == nextTable.getPointY())
+				|| (x == nextTable.getPointX() && y + this.getHeight() == nextTable.getPointY()))
+					&& !reachedTable) {
 				reachedTable = true;
 				reachedTableAt = System.nanoTime();
 				travellingToTable = false;
@@ -144,12 +158,12 @@ public class Drunk extends InteractableSprite {
 		boolean movedLeft = false;
 		
 		// Move closer to the next table
-		if (x < nextTable.getPointX()) {
+		if (x + this.getWidth() < nextTable.getPointX()) {
 			
-			if ((x + speed) > nextTable.getPointX()) {
-				x = nextTable.getPointX();
+			if ((x + this.getWidth() + speed) >= nextTable.getPointX()) {
+				x = nextTable.getPointX() - this.getWidth();
 			}
-			else {
+			else if (!wouldBeTouchingAnotherSprite(this.x + speed, this.y)) {
 				x = x + speed;
 			}
 			
@@ -158,22 +172,22 @@ public class Drunk extends InteractableSprite {
 		
 		if (x > nextTable.getPointX()) {
 			
-			if ((x - speed) < nextTable.getPointX()) {
+			if ((x - speed) <= nextTable.getPointX()) {
 				x = nextTable.getPointX();
 			}
-			else {
+			else if (!wouldBeTouchingAnotherSprite(this.x - speed, this.y)) {
 				x = x - speed;
 			}
 			
 			movedLeft = true;
 		}
 		
-		if (y < nextTable.getPointY()) {
+		if (y + this.getHeight() < nextTable.getPointY()) {
 			
-			if ((y + speed) > nextTable.getPointY()) {
-				y = nextTable.getPointY();
+			if ((y + this.getHeight() + speed) >= nextTable.getPointY()) {
+				y = nextTable.getPointY() - this.getHeight();
 			}
-			else {
+			else if (!wouldBeTouchingAnotherSprite(this.x, this.y + speed)) {
 				y = y + speed;
 			}
 			
@@ -181,10 +195,10 @@ public class Drunk extends InteractableSprite {
 		}
 		
 		if (y > nextTable.getPointY()) {
-			if ((y - speed) < nextTable.getPointY()) {
+			if ((y - speed) <= nextTable.getPointY()) {
 				y = nextTable.getPointY();
 			}
-			else {
+			else if (!wouldBeTouchingAnotherSprite(this.x, this.y - speed)) {
 				y = y - speed;
 			}
 			
@@ -231,6 +245,17 @@ public class Drunk extends InteractableSprite {
 			
 			animationState = AnimationState.DOWN_RIGHT;
 		}
+		
+		if (x == previousX && y == previousY) {
+			stuckCounter++;
+		}
+		
+		if (stuckCounter > 10) {
+			isStuck = true;
+		}
+		
+		previousX = x;
+		previousY = y;
 	}
 	
 	public int getDrunkness() {

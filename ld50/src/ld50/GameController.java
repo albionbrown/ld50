@@ -112,6 +112,7 @@ private SoundClip backgroundNoise;
 	 if (!gameOver) {
 		 
 		 if (!backgroundNoise.isRunning()) {
+			 backgroundNoise.loop();
 			 backgroundNoise.play();
 		 }
 		 
@@ -219,6 +220,12 @@ private SoundClip backgroundNoise;
 	  player.addInteractable(table3);
 	  player.addInteractable(table4);
 	  player.addInteractable(table5);
+	  
+	  drunk.addInteractable(table1);
+	  drunk.addInteractable(table2);
+	  drunk.addInteractable(table3);
+	  drunk.addInteractable(table4);
+	  drunk.addInteractable(table5);
   }
   
   private void initialiseGuests() {

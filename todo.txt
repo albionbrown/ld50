@@ -16,8 +16,9 @@ sprite rotation - done
 add water tap and sobering mechanics
 Other guests - done - with random dialog?
 increase text size - done
-sound - party noise and slap
-can't go through other guests
+party noise - done
+slap - done
+can't go through other guests - done
 
 Nice to haves:
 beer in drunk's hand
