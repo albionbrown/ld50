@@ -28,8 +28,8 @@ public class Clock {
 		font.setNumberOfCharacters(59);
 		font.readImageCharacters();
 		
-		x = 50;
-		y = 100;
+		x = 85;
+		y = 150;
 		
 		stop = false;
 	}

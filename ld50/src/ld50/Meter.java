@@ -31,11 +31,11 @@ public class Meter extends Sprite {
 	@Override
 	public void render(Renderer r) {
 
-		r.drawText("Drunkness", this.font, 50, 20, 16777215);
+		r.drawText("Drunkness", this.font, 80, 80, 16777215);
 		// Background
-		r.drawSquare(0, 48, 53, (max * 2 + 4), 14);
+		r.drawSquare(0, 80, 113, (max * 2 + 4), 14);
 		// Level
-		r.drawSquare(2440609, 50, 55, level * 2, 10);
+		r.drawSquare(2440609, 82, 115, level * 2, 10);
 	}
 	
 	public void increment() {

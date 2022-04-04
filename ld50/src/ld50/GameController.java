@@ -41,8 +41,11 @@ private boolean gameOverSoundPlayed;
 private SoundClip backgroundNoise;
 
 private boolean introCompleted;
+private boolean firstLoop;
 
 private Image bunting;
+
+private Font font30;
 
 
   public static void main(String[] args) {
@@ -64,6 +67,12 @@ private Image bunting;
 	  gameOver = false;
 	  gameOverSoundPlayed = false;
 	  introCompleted = false;
+	  firstLoop = true;
+	  
+	  font30 = new Font();
+	  font30.setFontImage(new Image(getClass().getResourceAsStream("/img/font_30.png")));
+	  font30.setNumberOfCharacters(59);
+	  font30.readImageCharacters();
   }
   
   public void init() {
@@ -95,9 +104,9 @@ private Image bunting;
 	  gameOverText.setRender(false);
 	  gameOverText.setX(550);
 	  gameOverText.setY(400);
-	  gameOverText.setWidth(100);
+	  gameOverText.setWidth(10);
 	  gameOverText.setHeight(0);
-	  gameOverText.setText("Game over");
+	  gameOverText.setText("Game Over!");
 	  gameOverText.setBackgroundColour(0x000);
 	  gameOverText.setBreakOnWord(false);
 	  
@@ -117,8 +126,13 @@ private Image bunting;
   public void update(GameContainer gc) {
 	  
 	 // Introduction 
-	 if (!introCompleted) {
-		 introCompleted = true;
+	 if (!introCompleted || firstLoop) {
+		 
+		 if (input.isKey(KeyEvent.VK_SPACE)) {
+				
+			 introCompleted = true;
+		  }
+		 firstLoop = false;
 	 }
 	 else {
 		 
@@ -156,7 +170,7 @@ private Image bunting;
 
   @Override
   public void render(Renderer r) {
-	
+	  
 	  // Draw grass
 	  r.drawSquare(5668166, 0, 0, 1280, 960);
 	  
@@ -180,8 +194,17 @@ private Image bunting;
 	  drunkMeter.render(r);
 	  clock.render(r);
 	  
+	  if (!introCompleted) {
+		  r.drawText("Ah you made it!", font30, 450, 600, 16777215);
+		  r.drawText("Thank you so much for coming!", font30, 450, 650, 16777215);
+		  r.drawText("There are drinks at snacks at the tables", font30, 450, 700, 16777215);
+		  r.drawText("so please help yourself!", font30, 450, 750, 16777215);
+		  r.drawText("Press spacebar to play", font30, 450, 800, 16777215);
+	  }
+	  
 	  if (gameOver) {
 		  gameOverText.render(r);
+		  r.drawText("I think it's time Aunt Mavis went home...", font30, 375, 650, 16777215);
 	  }
   }
   
