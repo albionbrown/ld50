@@ -22,9 +22,9 @@ can't go through other guests - done
 
 Nice to haves:
 beer in drunk's hand
-guests move around randomly
+guests move around randomly - done
 surprise drops - 
-front of drunk matches table point
+front of drunk matches table point - done
 intro dialog
 antagonist relatives that give them drinks
 diagonal speed same as lateral speed

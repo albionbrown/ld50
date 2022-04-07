@@ -240,6 +240,7 @@ public class GameController implements Controller {
 	  table1.setHeight(180);
 	  table1.setPointX(225);
 	  table1.setPointY(750);
+	  table1.setImage(new Image(getClass().getResourceAsStream("/img/table1.png")));
 
 	  table2 = new Table("table 2");
 	  table2.setX(50);
@@ -256,6 +257,7 @@ public class GameController implements Controller {
 	  table3.setHeight(180);
 	  table3.setPointX(1025);
 	  table3.setPointY(230);
+	  table3.setImage(new Image(getClass().getResourceAsStream("/img/table2.png")));
 
 	  table4 = new Table("table 4");
 	  table4.setX(1050);
@@ -272,6 +274,7 @@ public class GameController implements Controller {
 	  table5.setHeight(180);
 	  table5.setPointX(490);
 	  table5.setPointY(230);
+	  table5.setImage(new Image(getClass().getResourceAsStream("/img/table3.png")));
 	  
 	  tables.add(table1);
 	  tables.add(table2);

@@ -1,6 +1,7 @@
 package ld50;
 
 import com.albionbrown.rawge.Renderer;
+import com.albionbrown.rawge.gfx.Image;
 import com.albionbrown.rawge.gfx.InteractableSprite;
 
 public class Table extends InteractableSprite {
@@ -54,7 +55,12 @@ public class Table extends InteractableSprite {
 	@Override
 	public void render(Renderer r) {
 		// TODO Auto-generated method stub
-		r.drawSquare(8421504, x, y, width, height);
+		if (this.image != null) {
+			r.drawImage(image, x, y);
+		}
+		else {
+			r.drawSquare(8421504, x, y, width, height);
+		}
 	}
 
 	@Override
@@ -69,4 +75,7 @@ public class Table extends InteractableSprite {
 		
 	}
 
+	public void setImage(Image image) {
+		this.image = image;
+	}	
 }

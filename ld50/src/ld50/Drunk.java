@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.albionbrown.rawge.Input;
 import com.albionbrown.rawge.Renderer;
+import com.albionbrown.rawge.gfx.Image;
 import com.albionbrown.rawge.gfx.ImageTile;
 import com.albionbrown.rawge.gfx.InteractableSprite;
 
@@ -69,6 +70,7 @@ public class Drunk extends InteractableSprite {
 		meterChangeNanoSecs = nanoToSec * 3;
 		stoppedByPlayer = false;
 		animationState = AnimationState.UP;
+		this.beer = new Beer();
 	}
 	
 	@Override
@@ -137,7 +139,10 @@ public class Drunk extends InteractableSprite {
 	public void render(Renderer r) {
 		
 		r.drawImageTile(getImageTile(), this.x, this.y, this.imageX, this.imageY);
-//		r.drawImage(beerImage, frontY, frontX);
+		
+		if (isDrinking) {
+			this.beer.render(r, frontX, frontY);
+		}
 	}
 	
 	private void pickTable() {
@@ -372,5 +377,14 @@ public class Drunk extends InteractableSprite {
 	
 	private class Beer {
 		
+		private Image image;
+		
+		public Beer () {
+			this.image = new Image(getClass().getResourceAsStream("/img/beer.png"));
+		}
+		
+		public void render(Renderer r, int x, int y) {
+			r.drawImage(this.image, x, y);
+		}
 	}
 }
