@@ -300,6 +300,10 @@ public class Drunk extends InteractableSprite {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public boolean isDrinking() {
+		return this.isDrinking;
+	}
 
 	public void setStoppedByPlayer(boolean stoppedByPlayer) {
 		this.stoppedByPlayer = stoppedByPlayer;
@@ -313,8 +317,7 @@ public class Drunk extends InteractableSprite {
 		this.imageTile = imageTile;
 	}
 
-	private void calculateAnimationDependencies()
-	{
+	private void calculateAnimationDependencies() {
 		switch (animationState) {
 			
 			case UP:

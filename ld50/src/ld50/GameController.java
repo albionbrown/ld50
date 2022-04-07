@@ -184,6 +184,21 @@ public class GameController implements Controller {
 				 gameOverSoundPlayed = true;
 				 gameOverSound.play(); 
 			 }
+			 
+			 if (input.isKey(KeyEvent.VK_ENTER)) {
+				
+				 gameOverSoundPlayed = false;
+				 introCompleted = false;
+				 firstLoop = true;
+				 gameOver = false;
+				 gameOverText.setRender(false);
+				 drunk.setDrunkness(0);
+				 clock.reset();
+				 drunk.setX(640);
+				 drunk.setY(840);
+				 player.setX(750);
+				 player.setY(840);
+			  }
 		 } 
 	 }
   }

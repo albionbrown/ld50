@@ -20,16 +20,13 @@ public class Clock {
 	private boolean stop;
 	
 	public Clock() {
-		this.hour = 18;
-		this.minute = 30;
+		
+		reset();
 		
 		font = new Font();
 		font.setFontImage(new Image(getClass().getResourceAsStream("/img/font_50.png")));
 		font.setNumberOfCharacters(59);
 		font.readImageCharacters();
-		
-		x = 85;
-		y = 150;
 		
 		stop = false;
 	}
@@ -93,5 +90,12 @@ public class Clock {
 	
 	public void stop() {
 		this.stop = true;
+	}
+	
+	public void reset() {
+		hour = 18;
+		minute = 30;
+		x = 85;
+		y = 150;
 	}
 }

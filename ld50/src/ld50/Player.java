@@ -156,7 +156,7 @@ public class Player extends InteractableSprite {
 					  }
 				  }
 				  
-				  if (playSound) {
+				  if (playSound && drunk.isDrinking()) {
 					  lastPlayed = soundIndex;
 					  this.reactionSounds.get(soundIndex).play();
 				  }
