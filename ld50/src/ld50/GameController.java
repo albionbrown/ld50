@@ -46,6 +46,8 @@ public class GameController implements Controller {
 	private Image bunting;
 
 	private Font font30;
+	
+	private ArrayList<WanderingGuest> wanderingGuests;
 
 
   public static void main(String[] args) {
@@ -73,6 +75,8 @@ public class GameController implements Controller {
 	  font30.setFontImage(new Image(getClass().getResourceAsStream("/img/font_30.png")));
 	  font30.setNumberOfCharacters(59);
 	  font30.readImageCharacters();
+	  
+	  this.wanderingGuests = new ArrayList<WanderingGuest>();
   }
   
   public void init() {
@@ -120,6 +124,18 @@ public class GameController implements Controller {
 	  initialiseGuests();
 	  
 	  bunting = new Image(getClass().getResourceAsStream("/img/bunting.png"));
+	  
+	  wanderingGuests.add(new WanderingGuest(new ImageTile(getClass().getResourceAsStream("/img/old_man_guest.png"), 80, 80), 400, 500));
+	  wanderingGuests.add(new WanderingGuest(new ImageTile(getClass().getResourceAsStream("/img/old_man_guest.png"), 80, 80), 400, 500));
+	  
+	  for (WanderingGuest guest: wanderingGuests) {
+		  player.addInteractable(guest);
+		  guest.addInteractable(player);
+//		  guest.addInteractable(guest1);
+//		  guest.addInteractable(guest2);
+//		  guest.addInteractable(guest3);
+//		  guest.addInteractable(guest4);
+	  }
   }
 
   @Override
@@ -147,6 +163,10 @@ public class GameController implements Controller {
 			 drunk.update();
 			 player.update();
 			 drunkMeter.update();
+			 
+			 for (WanderingGuest guest : wanderingGuests) {
+				 guest.update();
+			 }
 			 
 			 clock.update();
 			 
@@ -188,6 +208,10 @@ public class GameController implements Controller {
 	  
 	  drunk.render(r);
 	  player.render(r);
+	  
+	  for (WanderingGuest guest : wanderingGuests) {
+		  guest.render(r);
+	  }
 	  
 	  r.drawImage(bunting, 0, 0);
 	  
