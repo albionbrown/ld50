@@ -1,15 +1,13 @@
 package ld50;
 
 import java.awt.event.KeyEvent;
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import com.albionbrown.rawge.Input;
 import com.albionbrown.rawge.Renderer;
 import com.albionbrown.rawge.audio.SoundClip;
 import com.albionbrown.rawge.gfx.ImageTile;
-import com.albionbrown.rawge.gfx.Interactable;
 import com.albionbrown.rawge.gfx.InteractableSprite;
-import com.albionbrown.rawge.gfx.Sprite;
 
 public class Player extends InteractableSprite {
 	
@@ -20,6 +18,8 @@ public class Player extends InteractableSprite {
 	private int imageX, imageY;
 	
 	private SoundClip slapClip;
+	private ArrayList<SoundClip> reactionSounds;
+	private int lastPlayed;
 	
 	private AnimationState animationState;
 
@@ -46,6 +46,13 @@ public class Player extends InteractableSprite {
 		animationState = AnimationState.UP;
 		
 		slapClip = new SoundClip(getClass().getResourceAsStream("/audio/slap.wav"));
+		this.reactionSounds = new ArrayList<SoundClip>();
+		this.reactionSounds.add(new SoundClip(getClass().getResourceAsStream("/audio/no.wav")));
+		this.reactionSounds.add(new SoundClip(getClass().getResourceAsStream("/audio/put_that_down.wav")));
+		this.reactionSounds.add(new SoundClip(getClass().getResourceAsStream("/audio/aunt_mavis.wav")));
+		this.reactionSounds.add(new SoundClip(getClass().getResourceAsStream("/audio/thrown_out.wav")));
+		
+		lastPlayed = 0;
 	}
 	
 	@Override
@@ -136,8 +143,29 @@ public class Player extends InteractableSprite {
 			  if (this.getInput().isKey(KeyEvent.VK_SPACE)) {
 					
 				  slap();
+				  int soundIndex = pickSound();
+				  boolean playSound = true;
+				  
+				  while (soundIndex == lastPlayed) {
+					  soundIndex = pickSound();
+				  }
+				  
+				  for (SoundClip clip : this.reactionSounds) {
+					  if (clip.isRunning()) {
+						  playSound = false;
+					  }
+				  }
+				  
+				  if (playSound) {
+					  lastPlayed = soundIndex;
+					  this.reactionSounds.get(soundIndex).play();
+				  }
 			  }
 		  }  
+	}
+	
+	private int pickSound() {
+		return (int) ((Math.random() * (this.reactionSounds.size() - 0)) + 0);
 	}
 
 	@Override
@@ -218,6 +246,9 @@ public class Player extends InteractableSprite {
 	
 	private void slap() {
 		drunk.setStoppedByPlayer(true);
-		slapClip.play();
+		
+		if (!slapClip.isRunning()) {
+			slapClip.play();
+		}
 	}
 }

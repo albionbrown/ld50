@@ -83,7 +83,7 @@ public class GameController implements Controller {
 	  
 	  // Initialise player
 	  ImageTile playerImage = new ImageTile(getClass().getResourceAsStream("/img/player_animation.png"), 80, 80);
-	  player = new Player("player", playerImage, 80, 80, 730, 840, input);
+	  player = new Player("player", playerImage, 80, 80, 750, 840, input);
 
 	  // Initialise the drunk
 	  ImageTile drunkImage = new ImageTile(getClass().getResourceAsStream("/img/drunk_animation.png"), 80, 80);
