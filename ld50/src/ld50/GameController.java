@@ -12,45 +12,45 @@ import com.albionbrown.rawge.gfx.*;
 
 public class GameController implements Controller {
 
-public static Input input;
+	public static Input input;
 
-public Player player;
-public Drunk drunk;
+	public Player player;
+	public Drunk drunk;
 
-public Guest guest1;
-public Guest guest2;
-public Guest guest3;
-public Guest guest4;
+	public Guest guest1;
+	public Guest guest2;
+	public Guest guest3;
+	public Guest guest4;
 
-public Meter drunkMeter;
+	public Meter drunkMeter;
 
-public Clock clock;
+	public Clock clock;
 
-public Table table1;
-public Table table2;
-public Table table3;
-public Table table4;
-public Table table5;
-public ArrayList<Table> tables;
+	public Table table1;
+	public Table table2;
+	public Table table3;
+	public Table table4;
+	public Table table5;
+	public ArrayList<Table> tables;
 
-private boolean gameOver;
-private DialogBox gameOverText;
-private SoundClip gameOverSound;
-private boolean gameOverSoundPlayed;
+	private boolean gameOver;
+	private DialogBox gameOverText;
+	private SoundClip gameOverSound;
+	private boolean gameOverSoundPlayed;
 
-private SoundClip backgroundNoise;
+	private SoundClip backgroundNoise;
 
-private boolean introCompleted;
-private boolean firstLoop;
+	private boolean introCompleted;
+	private boolean firstLoop;
 
-private Image bunting;
+	private Image bunting;
 
-private Font font30;
+	private Font font30;
 
 
   public static void main(String[] args) {
 	  GameController gController = new GameController();
-	  GameContainer gContainer = new GameContainer("LD50", 1280, 960, gController);
+	  GameContainer gContainer = new GameContainer("Aunt Mavis", 1280, 960, gController);
 	  gContainer.setScale(1f);
 	  gContainer.initialise();
 	  
@@ -197,7 +197,7 @@ private Font font30;
 	  if (!introCompleted) {
 		  r.drawText("Ah you made it!", font30, 450, 600, 16777215);
 		  r.drawText("Thank you so much for coming!", font30, 450, 650, 16777215);
-		  r.drawText("There are drinks at snacks at the tables", font30, 450, 700, 16777215);
+		  r.drawText("There are drinks and snacks at the tables", font30, 450, 700, 16777215);
 		  r.drawText("so please help yourself!", font30, 450, 750, 16777215);
 		  r.drawText("Press spacebar to play", font30, 450, 800, 16777215);
 	  }
