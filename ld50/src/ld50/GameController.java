@@ -126,15 +126,15 @@ public class GameController implements Controller {
 	  bunting = new Image(getClass().getResourceAsStream("/img/bunting.png"));
 	  
 	  wanderingGuests.add(new WanderingGuest(new ImageTile(getClass().getResourceAsStream("/img/old_man_guest.png"), 80, 80), 400, 500));
-	  wanderingGuests.add(new WanderingGuest(new ImageTile(getClass().getResourceAsStream("/img/old_man_guest.png"), 80, 80), 400, 500));
+	  wanderingGuests.add(new WanderingGuest(new ImageTile(getClass().getResourceAsStream("/img/old_man_guest.png"), 80, 80), 800, 700));
 	  
 	  for (WanderingGuest guest: wanderingGuests) {
 		  player.addInteractable(guest);
 		  guest.addInteractable(player);
-//		  guest.addInteractable(guest1);
-//		  guest.addInteractable(guest2);
-//		  guest.addInteractable(guest3);
-//		  guest.addInteractable(guest4);
+		  guest.addInteractable(guest1);
+		  guest.addInteractable(guest2);
+		  guest.addInteractable(guest3);
+		  guest.addInteractable(guest4);
 	  }
   }
 

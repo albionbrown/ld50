@@ -24,6 +24,10 @@ public class WanderingGuest extends Guest {
 	private final int speed = 1;
 	
 	private AnimationState animationState;
+	
+	private boolean isStuck;
+	private int previousX, previousY;
+	private int stuckCounter;
 
 	public WanderingGuest(ImageTile image, int x, int y) {
 		super("", image, x, y);
@@ -40,8 +44,14 @@ public class WanderingGuest extends Guest {
 	public void update() {
 		
 		if (!reachedTarget) {
-			
-			travelToTarget();
+			if (isStuck) {
+				setTarget();
+				isStuck = false;
+				stuckCounter = 0;
+			}
+			else {
+				travelToTarget();
+			}
 		}
 		else {
 			
@@ -169,17 +179,17 @@ public class WanderingGuest extends Guest {
 		}
 		
 		calculateAnimationDependencies();
-//		
-//		if (x == previousX && y == previousY) {
-//			stuckCounter++;
-//		}
-//		
-//		if (stuckCounter > 10) {
-//			isStuck = true;
-//		}
-//		
-//		previousX = x;
-//		previousY = y;
+
+		if (x == previousX && y == previousY) {
+			stuckCounter++;
+		}
+		
+		if (stuckCounter > 10) {
+			isStuck = true;
+		}
+		
+		previousX = x;
+		previousY = y;
 	}
 	
 	private void calculateAnimationDependencies()
